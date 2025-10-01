@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "6.14.1"
     }
   }
@@ -9,18 +9,18 @@ terraform {
 
 provider "aws" {
   # Configuration options
-  region = "ap-south-1"
+  region = var.region
 }
 
 # variable "type" {
-  
+
 # }
 
 resource "aws_instance" "myserver" {
-    ami = "ami-0f5d42f0ba3ba0328"
-    instance_type = "t4g.nano"
+  ami           = "ami-0f5d42f0ba3ba0328"
+  instance_type = "t4g.nano"
 
-    tags = {
-        Name = "Leo-Server"
-    }
+  tags = {
+    Name = "Leo-Server"
+  }
 }

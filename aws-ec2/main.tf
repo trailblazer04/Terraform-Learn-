@@ -17,7 +17,7 @@ provider "aws" {
 # }
 
 resource "aws_instance" "myserver" {
-    ami = "ami-0b9093ea00a0fed92"
+    ami = "ami-0f5d42f0ba3ba0328"
     instance_type = "t4g.nano"
 
     tags = {

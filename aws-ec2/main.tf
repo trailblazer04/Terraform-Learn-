@@ -12,9 +12,13 @@ provider "aws" {
   region = "ap-south-1"
 }
 
+# variable "type" {
+  
+# }
+
 resource "aws_instance" "myserver" {
     ami = "ami-0b9093ea00a0fed92"
-    instance_type = "t4g.small"
+    instance_type = "t4g.nano"
 
     tags = {
         Name = "Leo-Server"

@@ -38,14 +38,14 @@ resource "aws_s3_bucket_public_access_block" "example" {
   restrict_public_buckets = false
 }
 
-resource "aws_s3_bucket_policy" "leo-portfolio-bucket" {
+resource "aws_s3_bucket_policy" "leo-portfolio-bucket-policy" {
   bucket = aws_s3_bucket.leo-portfolio-bucket.id
   policy = jsonencode(
     {
     Version = "2012-10-17",		 	 	 
     Statement = [
         {
-            Sid = "PublicReadGetObject",
+            # Sid = "PublicReadGetObject",
             Effect = "Allow",
             Principal = "*",
             Action = "s3:GetObject",
@@ -56,7 +56,7 @@ resource "aws_s3_bucket_policy" "leo-portfolio-bucket" {
   )
 }
 
-resource "aws_s3_bucket_website_configuration" "leo-portfolio-bucket" {
+resource "aws_s3_bucket_website_configuration" "leo-portfolio-bucket-conf" {
   bucket = aws_s3_bucket.leo-portfolio-bucket.id
 
   index_document {
@@ -75,7 +75,7 @@ resource "aws_s3_object" "index_html" {
 resource "aws_s3_object" "style_css" {
   bucket = aws_s3_bucket.leo-portfolio-bucket.bucket
   source = "./css/style.css"
-  key    = "style.css"
+  key    = "/css/style.css"
   content_type = "text/css"
 
 }
@@ -83,7 +83,7 @@ resource "aws_s3_object" "style_css" {
 resource "aws_s3_object" "Profile_pic_Leo_jpg" {
   bucket = aws_s3_bucket.leo-portfolio-bucket.bucket
   source = "./images/Profile_pic_Leo.jpg"
-  key    = "Profile_pic_Leo.jpg"
+  key    = "/images/Profile_pic_Leo.jpg"
   content_type = "image/jpg"
 
 }
@@ -91,10 +91,10 @@ resource "aws_s3_object" "Profile_pic_Leo_jpg" {
 resource "aws_s3_object" "script_js" {
   bucket = aws_s3_bucket.leo-portfolio-bucket.bucket
   source = "./js/script.js"
-  key    = "script.js"
+  key    = "/js/script.js"
   content_type = "text/js"
 
 }
 output "rand_id" {
-  value = aws_s3_bucket_website_configuration.leo-portfolio-bucket.website_endpoint 
+  value = "http://${aws_s3_bucket_website_configuration.leo-portfolio-bucket-conf.website_endpoint}"
 }

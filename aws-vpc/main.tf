@@ -61,3 +61,14 @@ resource "aws_route_table_association" "public-sub" {
   route_table_id = aws_route_table.my-rt.id
   subnet_id = aws_subnet.public-subnet.id
 }
+
+# create ec2 instance
+resource "aws_instance" "myserver" {
+  ami           = "ami-0f5d42f0ba3ba0328"
+  instance_type = "t4g.nano"
+  subnet_id = aws_subnet.public-subnet.id
+
+  tags = {
+    Name = "Leo-Server"
+  }
+}
